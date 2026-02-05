@@ -60,22 +60,22 @@ ffmpeg-python==0.2.0
 ### Techstack Used:
 
 BACKEND:
-• Python 3.9+
-• Flask (API Server)
-• OpenAI Whisper (TINY) - Audio Transcription
-• Transformers (BART-large-cnn) - Text Summarization
-• FFmpeg - Video to Audio Extraction
-• PyTorch 2.5.1 - AI Acceleration (CPU)
+- Python 3.9+
+- Flask (API Server)
+- OpenAI Whisper (TINY) - Audio Transcription
+- Transformers (BART-large-cnn) - Text Summarization
+- FFmpeg - Video to Audio Extraction
+- PyTorch 2.5.1 - AI Acceleration (CPU)
 
 FRONTEND:
-• React 18
-• Vite (Build Tool)
-• TailwindCSS / Custom CSS
-• Axios (API Calls)
+- React 18
+- Vite (Build Tool)
+- TailwindCSS / Custom CSS
+- Axios (API Calls)
 
 CORE FEATURES:
-• Anaconda Environment
-• CORS Enabled
-• Production Error Handling
-• Glassmorphism UI Design
-• Drag & Drop File Upload
+- Anaconda Environment
+- CORS Enabled
+- Production Error Handling
+- Glassmorphism UI Design
+- Drag & Drop File Upload
