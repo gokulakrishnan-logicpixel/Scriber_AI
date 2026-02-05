@@ -1,4 +1,4 @@
-# Medifist-
+# Scriber AI
 Scriber AI - Video Summarizer 🚀
 
 # How to run ?
