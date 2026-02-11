@@ -1,0 +1,361 @@
+/* 🔥 PERFECT BACKGROUND - Animated Gradient */
+.summary-page {
+  min-height: 100vh;
+  background: linear-gradient(90deg, #4a1d7a 0%, #2c1250 55%, #2c0f5e 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 90px;
+  position: relative;
+  overflow: hidden;
+}
+
+.summary-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 40% 40%, rgba(139, 92, 246, 0.2) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ✨ MAIN CONTAINER - Ultimate Glass Effect */
+.summary-container {
+  width: 100%;
+  max-width: 850px;
+  background: rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(35px);
+  -webkit-backdrop-filter: blur(35px);
+  border-radius: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 
+    0 35px 70px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+    0 0 100px rgba(139, 92, 246, 0.15);
+  padding: 56px 48px;
+  position: relative;
+  z-index: 2;
+  animation: floatIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* 🎯 HEADER - Stunning Gradient Text */
+.summary-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.summary-header h1 {
+  font-size: clamp(32px, 6vw, 44px);
+  font-weight: 900;
+ background: linear-gradient(135deg, #7c3aed 0%, #9333ea 30%, #a855f7 70%, #e9d5ff 100%);
+
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.03em;
+  text-shadow: 
+    0 4px 20px rgba(16, 185, 129, 0.3),
+    0 0 40px rgba(16, 185, 129, 0.2);
+}
+
+.summary-header p {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: 0.3px;
+}
+
+/* 📝 SUMMARY CONTENT - Glass Panel */
+.summary-content {
+  margin: 40px 0;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.summary-textarea {
+  width: 100%;
+  min-height: 380px;
+  max-height: 450px;
+  background: rgba(255, 255, 255, 0.92);
+  border: none;
+  outline: none;
+  padding: 32px;
+  font-size: 16.5px;
+  line-height: 1.75;
+  color: #1f2937;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'SF Pro Display', sans-serif;
+  resize: vertical;
+  border-radius: 24px;
+  box-shadow: 
+    inset 0 4px 20px rgba(0, 0, 0, 0.08),
+    0 8px 30px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.summary-textarea:hover {
+  box-shadow: 
+    inset 0 4px 20px rgba(0, 0, 0, 0.1),
+    0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.summary-textarea:focus {
+  box-shadow: 
+    inset 0 2px 12px rgba(0, 0, 0, 0.08),
+    0 0 0 3px rgba(16, 185, 129, 0.2),
+    0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+.summary-textarea::placeholder {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* 🔥 DOWNLOAD BUTTONS - 3D Gradient Magic */
+.download-section {
+  display: flex;
+  gap: 20px;
+  margin: 48px 0;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.download-btn {
+  flex: 1;
+  min-width: 160px;
+  padding: 20px 28px;
+  border: none;
+  border-radius: 24px;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 
+    0 12px 35px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.download-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.6s;
+}
+
+.download-btn:hover::before {
+  left: 100%;
+}
+
+.download-btn:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 
+    0 25px 60px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.download-btn:active {
+  transform: translateY(-3px) scale(0.98);
+}
+
+/* 🌈 INDIVIDUAL BUTTON COLORS */
+.download-btn.txt {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%);
+  color: white;
+}
+
+.download-btn.pdf {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #b91c1c 100%);
+  color: white;
+}
+
+.download-btn.copy {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6d28d9 100%);
+  color: white;
+}
+
+/* 🔙 BACK BUTTON - Elegant Glass */
+.summary-footer {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.back-btn {
+  width: 100%;
+  padding: 22px;
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 24px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  backdrop-filter: blur(20px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.28);
+  transform: translateY(-4px);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+
+.summary-footer span {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  margin-top: 20px;
+  display: block;
+  letter-spacing: 0.3px;
+}
+
+/* ⏳ LOADING SPINNER */
+.loading-spinner {
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.9);
+  animation: pulse 1.5s infinite;
+}
+
+/* ✨ ANIMATIONS */
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+
+/* Illustrations */
+.illu {
+  position: absolute;
+  width: 240px;
+  opacity: 0.6;
+  z-index: 1;
+}
+
+.illu-13 {
+  left: 2%;
+  top: 15%;
+}
+
+.illu-14 {
+  right: 2%;
+  top: 20%;
+}
+
+.illu-15 {
+  left: 3%;
+  bottom: 15%;
+  
+}
+
+.illu-16 {
+  right: 2%;
+  bottom: 20%;
+}
+
+/* 📱 RESPONSIVE PERFECTION */
+@media (max-width: 768px) {
+  .summary-container {
+    padding: 40px 32px;
+    margin: 16px;
+    border-radius: 28px;
+  }
+  
+  .summary-header h1 {
+    font-size: 28px;
+  }
+  
+  .download-section {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .download-btn {
+    width: 100%;
+    min-width: unset;
+  }
+  
+  .summary-textarea {
+    min-height: 300px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .summary-container {
+    padding: 32px 24px;
+  }
+  
+  .summary-header h1 {
+    font-size: 24px;
+  }
+  
+  .summary-textarea {
+    min-height: 260px;
+    padding: 24px;
+  }
+}
+
+/* 🖥️ SCROLLBAR CUSTOMIZATION */
+.summary-textarea::-webkit-scrollbar {
+  width: 8px;
+}
+
+.summary-textarea::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.summary-textarea::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
+}
+
+.summary-textarea::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.6);
+}

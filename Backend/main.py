@@ -15,14 +15,11 @@ CORS(app)
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-@app.route("/gpu-status")
-def gpu_status():
-    return jsonify({"cuda": torch.cuda.is_available(), "device": "cuda" if torch.cuda.is_available() else "cpu"})
-
+# ----------------------------
+# 🔥 FIXED: UPLOAD → TRANSCRIPTION + SUMMARY (ONE CALL)
+# ----------------------------
 @app.route("/upload", methods=["POST"])
 def upload_video():
-    print("📱 Upload received")
-    
     if "file" not in request.files:
         return jsonify({"error": "No file"}), 400
 
@@ -33,43 +30,89 @@ def upload_video():
     safe_name = re.sub(r'[^a-zA-Z0-9._-]', '_', file.filename)
     video_path = os.path.join(UPLOAD_FOLDER, safe_name)
     file.save(video_path)
-    
-    size_mb = os.path.getsize(video_path) / 1024 / 1024
-    print(f"💾 Saved: {safe_name} ({size_mb:.1f}MB)")
 
     try:
-        # BULLETPROOF PIPELINE
-        print("🚀 ULTRA-FAST Processing...")
         audio_path = "temp_audio.wav"
-        
-        # 1. Extract audio
+
+        # 1️⃣ Extract + Transcribe
+        print("🔄 Extracting audio...")
         extract_audio(video_path, audio_path)
-        
-        # 2. Transcribe (TINY = 25sec)
+        print("🎤 Transcribing...")
         transcript = transcribe_audio(audio_path)
-        print(f"📝 Transcript: {len(transcript)} chars")
+
+        # 2️⃣ Generate Summary (DYNAMIC LENGTH)
+        print("✨ Generating summary...")
+        length = len(transcript)
         
-        # 3. CRASH-PROOF Summary (truncate + single pass)
-        short_transcript = transcript[:3000]  # Fix index error
-        summary = summarize_text(short_transcript)
+        if length < 1500:
+            max_len, min_len = 120, 30
+        elif length < 5000:
+            max_len, min_len = 220, 80
+        else:
+            max_len, min_len = 350, 120
+
+        safe_text = transcript[:3000]  # Limit for LLM
+        summary = summarize_text(
+            safe_text,
+            max_length=max_len,
+            min_length=min_len
+        )
+
+        print("✅ COMPLETE: Transcript + Summary ready!")
         
-        # Cleanup
-        for path in [video_path, audio_path]:
-            if os.path.exists(path):
-                os.remove(path)
-                
         return jsonify({
             "success": True,
-            "summary": summary,
+            "transcript": transcript,
+            "summary": summary,          # 🔥 NOW RETURNS SUMMARY
             "transcript_length": len(transcript),
             "summary_length": len(summary)
         })
-        
+
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f"❌ ERROR: {str(e)}")
         return jsonify({"error": str(e)}), 500
 
+    finally:
+        # Cleanup
+        for path in [video_path, "temp_audio.wav"]:
+            if os.path.exists(path):
+                os.remove(path)
+
+# ----------------------------
+# Keep /summarize endpoint (bonus feature)
+# ----------------------------
+@app.route("/summarize", methods=["POST"])
+def summarize():
+    data = request.json
+    transcript = data.get("transcript", "")
+
+    if not transcript:
+        return jsonify({"error": "No transcript"}), 400
+
+    length = len(transcript)
+
+    if length < 1500:
+        max_len, min_len = 120, 30
+    elif length < 5000:
+        max_len, min_len = 220, 80
+    else:
+        max_len, min_len = 350, 120
+
+    safe_text = transcript[:3000]
+    summary = summarize_text(
+        safe_text,
+        max_length=max_len,
+        min_length=min_len
+    )
+
+    return jsonify({
+        "success": True,
+        "transcript": transcript,
+        "summary": summary
+    })
+
 if __name__ == "__main__":
-    print("🚀 Scriber AI (45sec NO-CRASH)")
-    print(f"PyTorch: {torch.__version__}")
-    app.run(host="127.0.0.1", port=5000, debug=False, threaded=True)
+    print("🚀 Scriber AI — Video → Transcript → Summary (COMPLETE)")
+    print("📡 /upload endpoint: Video → Transcript + Summary")
+    print("🌐 Server running at http://127.0.0.1:5000")
+    app.run(host="127.0.0.1", port=5000, debug=True)
